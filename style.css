@@ -19,7 +19,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
 }
 
 h1 {
@@ -100,4 +100,43 @@ input[type="number"]:focus {
 
 .result-group h3 {
     color: #3f51b5;
+}
+
+.schedule-container {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.schedule-container h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+#amortization-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#amortization-table th, #amortization-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+#amortization-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+#amortization-table tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
