@@ -79,4 +79,28 @@ function generateAmortizationSchedule(principal, months, annualInterestRate, mon
     }
 
     document.getElementById('schedule-container').style.display = 'block';
+
+    // Show the export button
+    document.getElementById('export-pdf').style.display = 'block';
 }
+
+// Attach event listener for the export PDF button
+document.getElementById('export-pdf').addEventListener('click', function() {
+    const element = document.getElementById('schedule-container');
+    const opt = {
+        margin:       0.5,
+        filename:     'grafic_de_rambursare.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // Temporarily hide the button during PDF generation
+    const exportBtn = document.getElementById('export-pdf');
+    exportBtn.style.display = 'none';
+
+    html2pdf().from(element).set(opt).save().then(() => {
+        // Show the button again after generation
+        exportBtn.style.display = 'block';
+    });
+});

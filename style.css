@@ -115,6 +115,20 @@ input[type="number"]:focus {
     text-align: center;
 }
 
+.btn-export {
+    background-color: #4caf50;
+    margin-bottom: 15px;
+    width: auto;
+    padding: 8px 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-export:hover {
+    background-color: #43a047;
+}
+
 .table-responsive {
     overflow-x: auto;
 }

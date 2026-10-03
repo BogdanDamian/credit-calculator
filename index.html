@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator Rata Credit</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
     <div class="calculator-container">
@@ -46,6 +47,7 @@
 
         <div id="schedule-container" class="schedule-container" style="display: none;">
             <h2>Grafic de rambursare</h2>
+            <button id="export-pdf" class="btn btn-export" style="display: none;">Exportă ca PDF</button>
             <div class="table-responsive">
                 <table id="amortization-table">
                     <thead>
