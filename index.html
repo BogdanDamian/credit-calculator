@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Rata Credit</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </div>
+        </label>
+    </div>
+
+    <div class="calculator-container">
+        <h1>Calculator Rata Credit</h1>
+        <form id="loan-form">
+            <div class="form-group">
+                <label for="amount">Suma dorita (RON):</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <input type="number" id="amount" placeholder="Ex: 50000" required min="1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="period">Perioada:</label>
+                <div class="input-with-icon flex-group">
+                    <i class="fas fa-calendar-alt"></i>
+                    <input type="number" id="period" placeholder="Ex: 60" required min="1">
+                    <select id="period-type" class="period-select">
+                        <option value="months">Luni</option>
+                        <option value="years">Ani</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="interest">Dobanda Anuala (%):</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-percentage"></i>
+                    <input type="number" id="interest" placeholder="Ex: 8.5" step="0.01" required min="0">
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Calculeaza</button>
+        </form>
+
+        <div id="results" class="results-container" style="display: none;">
+            <h2>Rezultate</h2>
+
+            <div class="chart-container">
+                <canvas id="loanChart"></canvas>
+            </div>
+
+            <div class="result-group">
+                <p>Rata lunara:</p>
+                <h3 id="monthly-payment">0 RON</h3>
+            </div>
+            <div class="result-group">
+                <p>Total de plata:</p>
+                <h3 id="total-payment">0 RON</h3>
+            </div>
+            <div class="result-group">
+                <p>Total dobanda platita:</p>
+                <h3 id="total-interest">0 RON</h3>
+            </div>
+        </div>
+
+        <div id="schedule-container" class="schedule-container" style="display: none;">
+            <h2>Grafic de rambursare</h2>
+            <button id="export-pdf" class="btn btn-export" style="display: none;">Exportă ca PDF</button>
+            <div class="table-responsive">
+                <table id="amortization-table">
+                    <thead>
+                        <tr>
+                            <th>Luna</th>
+                            <th>Rata lunara</th>
+                            <th>Principal</th>
+                            <th>Dobanda</th>
+                            <th>Sold ramas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Schedule rows will go here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
