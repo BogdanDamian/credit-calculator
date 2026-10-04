@@ -66,6 +66,16 @@ repaymentType.addEventListener('change', function() {
     repaymentMonthGroup.style.display = this.value === 'one-time' ? 'block' : 'none';
 });
 
+// Reset button functionality
+document.getElementById('reset-btn').addEventListener('click', function() {
+    document.getElementById('loan-form').reset();
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('schedule-container').style.display = 'none';
+    document.getElementById('calculate-btn').style.display = 'block';
+    this.style.display = 'none'; // hide reset button
+    document.getElementById('early-repayment-section').style.display = 'none';
+});
+
 document.getElementById('loan-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -141,6 +151,10 @@ document.getElementById('loan-form').addEventListener('submit', function(e) {
 
         // Show the results container
         document.getElementById('results').style.display = 'block';
+
+        // Hide calculate button, show reset button
+        document.getElementById('calculate-btn').style.display = 'none';
+        document.getElementById('reset-btn').style.display = 'block';
 
         // Generate Chart
         generateChart(amount, finalTotalInterest, isEarlyRepayment ? (baseTotalInterest - finalTotalInterest) : 0);
@@ -240,8 +254,11 @@ function generateAmortizationSchedule(principal, months, annualInterestRate, mon
 
         // Adjust if final payment is larger than remaining balance
         if (principalPayment + extraPayment >= remainingBalance) {
-            principalPayment = remainingBalance;
-            extraPayment = 0; // Don't overpay
+            extraPayment = remainingBalance - principalPayment;
+            if (extraPayment < 0) {
+                principalPayment = remainingBalance;
+                extraPayment = 0;
+            }
             remainingBalance = 0;
             currentMonthlyPayment = principalPayment + interestPayment;
         } else {
@@ -267,8 +284,10 @@ function generateAmortizationSchedule(principal, months, annualInterestRate, mon
         // Recalculate EMI if strategy is 'emi' and we made an extra payment
         if (extraPayment > 0 && earlyRepayment.strategy === 'emi' && annualInterestRate > 0) {
             const remainingMonths = months - month;
-            const x = Math.pow(1 + monthlyInterestRate, remainingMonths);
-            currentMonthlyPayment = (remainingBalance * x * monthlyInterestRate) / (x - 1);
+            if (remainingMonths > 0) {
+                const x = Math.pow(1 + monthlyInterestRate, remainingMonths);
+                currentMonthlyPayment = (remainingBalance * x * monthlyInterestRate) / (x - 1);
+            }
         }
 
         month++;
