@@ -51,6 +51,47 @@
                 </div>
             </div>
 
+            <div class="form-group toggle-group">
+                <label class="switch-label">
+                    <input type="checkbox" id="enable-early-repayment">
+                    Adaugă rambursare anticipată
+                </label>
+            </div>
+
+            <div id="early-repayment-section" style="display: none; padding: 15px; background: var(--result-bg); border-radius: 4px; margin-bottom: 15px;">
+                <div class="form-group">
+                    <label for="repayment-type">Tipul rambursării:</label>
+                    <select id="repayment-type" class="period-select" style="width: 100%;">
+                        <option value="recurring">Recurentă (lunară)</option>
+                        <option value="one-time">Singulară (o singură dată)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="extra-amount">Suma rambursată (RON):</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-coins"></i>
+                        <input type="text" id="extra-amount" placeholder="Ex: 500">
+                    </div>
+                </div>
+
+                <div class="form-group" id="repayment-month-group" style="display: none;">
+                    <label for="repayment-month">În a câta lună?:</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar-day"></i>
+                        <input type="number" id="repayment-month" placeholder="Ex: 12" min="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="repayment-strategy">Ce dorești să scadă?:</label>
+                    <select id="repayment-strategy" class="period-select" style="width: 100%;">
+                        <option value="term">Scade perioada creditului</option>
+                        <option value="emi">Scade rata lunară</option>
+                    </select>
+                </div>
+            </div>
+
             <button type="submit" class="btn">Calculeaza</button>
         </form>
 
@@ -73,6 +114,12 @@
                 <p>Total dobanda platita:</p>
                 <h3 id="total-interest">0 RON</h3>
             </div>
+
+            <div id="savings-summary" class="savings-container" style="display: none; margin-top: 15px; padding: 15px; background-color: rgba(76, 175, 80, 0.1); border-left: 4px solid #4caf50; border-radius: 4px;">
+                <h4 style="color: #4caf50; margin-bottom: 10px;">Economii prin rambursare anticipată</h4>
+                <p>Dobândă economisită: <strong id="saved-interest">0 RON</strong></p>
+                <p>Timp redus: <strong id="saved-time">0 luni</strong></p>
+            </div>
         </div>
 
         <div id="schedule-container" class="schedule-container" style="display: none;">
@@ -84,6 +131,7 @@
                         <tr>
                             <th>Luna</th>
                             <th>Rata lunara</th>
+                            <th>Plată Antic.</th>
                             <th>Principal</th>
                             <th>Dobanda</th>
                             <th>Sold ramas</th>
