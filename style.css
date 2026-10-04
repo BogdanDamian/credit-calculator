@@ -139,13 +139,13 @@ label {
 .chart-container {
     position: relative;
     width: 100%;
-    max-width: 250px;
+    max-width: 200px;
     margin: 0 auto 20px auto;
 }
 
 .results-container {
-    margin-top: 25px;
-    padding-top: 20px;
+    margin-top: 15px;
+    padding-top: 10px;
     border-top: 1px solid var(--input-border);
 }
 
@@ -175,8 +175,8 @@ label {
 }
 
 .schedule-container {
-    margin-top: 25px;
-    padding-top: 20px;
+    margin-top: 15px;
+    padding-top: 10px;
     border-top: 1px solid var(--input-border);
 }
 
@@ -234,7 +234,7 @@ label {
     justify-content: flex-end;
     width: 100%;
     max-width: 600px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .theme-switch {

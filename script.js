@@ -25,11 +25,46 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
+// Add input formatting as you type
+const amountInput = document.getElementById('amount');
+
+// Remove formatting before calculation
+function getRawNumber(value) {
+    return value.replace(/,/g, '');
+}
+
+function formatNumberString(value) {
+    // Remove non-digit and non-decimal characters
+    let numericValue = value.replace(/[^\d.]/g, '');
+
+    // Ensure only one decimal point
+    const parts = numericValue.split('.');
+    if (parts.length > 2) {
+        parts.pop();
+        numericValue = parts.join('.');
+    }
+
+    if (numericValue === '') return '';
+
+    if (parts.length === 2) {
+        return parseFloat(parts[0]).toLocaleString('en-US') + '.' + parts[1];
+    }
+    return parseFloat(numericValue).toLocaleString('en-US');
+}
+
+amountInput.addEventListener('input', function(e) {
+    // Save cursor position
+    const cursorPosition = e.target.selectionStart;
+    const originalLength = e.target.value.length;
+
+    this.value = formatNumberString(this.value);
+});
+
 document.getElementById('loan-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
     // Get input values
-    const amount = parseFloat(document.getElementById('amount').value);
+    const amount = parseFloat(getRawNumber(document.getElementById('amount').value));
     let periodValue = parseInt(document.getElementById('period').value);
     const periodType = document.getElementById('period-type').value;
     const annualInterestRate = parseFloat(document.getElementById('interest').value);
