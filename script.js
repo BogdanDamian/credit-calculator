@@ -34,30 +34,21 @@ function getRawNumber(value) {
 }
 
 function formatNumberString(value) {
-    // Remove non-digit and non-decimal characters
-    let numericValue = value.replace(/[^\d.]/g, '');
-
-    // Ensure only one decimal point
-    const parts = numericValue.split('.');
-    if (parts.length > 2) {
-        parts.pop();
-        numericValue = parts.join('.');
-    }
-
-    if (numericValue === '') return '';
-
-    if (parts.length === 2) {
-        return parseFloat(parts[0]).toLocaleString('en-US') + '.' + parts[1];
-    }
-    return parseFloat(numericValue).toLocaleString('en-US');
+    // Remove non-digits
+    return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 amountInput.addEventListener('input', function(e) {
     // Save cursor position
-    const cursorPosition = e.target.selectionStart;
+    let cursorPosition = e.target.selectionStart;
     const originalLength = e.target.value.length;
 
     this.value = formatNumberString(this.value);
+
+    // Set cursor position
+    const newLength = this.value.length;
+    cursorPosition = cursorPosition + (newLength - originalLength);
+    this.setSelectionRange(cursorPosition, cursorPosition);
 });
 
 document.getElementById('loan-form').addEventListener('submit', function(e) {
